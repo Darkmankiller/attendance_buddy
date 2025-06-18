@@ -128,47 +128,54 @@ const Index = () => {
   const isToday = selectedDate.toDateString() === new Date().toDateString();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
+    <div className="min-h-screen anime-background">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <BookOpen className="h-8 w-8 text-purple-400" />
-            <h1 className="text-4xl font-bold text-white">Smart Attendance Tracker</h1>
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="p-3 rounded-full bg-gradient-to-r from-primary to-secondary animate-glow-pulse">
+              <BookOpen className="h-8 w-8 text-white" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-orbitron font-black sci-fi-header">
+              Smart Attendance Tracker
+            </h1>
           </div>
-          <p className="text-purple-200 text-lg">College Semester: June 2, 2025 - December 2, 2025</p>
+          <p className="text-lg font-poppins text-muted-foreground">
+            College Semester: June 2, 2025 - December 2, 2025
+          </p>
         </div>
 
         {/* Date Navigation and Calendar */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
           <div className="flex items-center gap-4">
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3 text-white">
-                  <CalendarIcon className="h-5 w-5 text-purple-400" />
-                  <span className="font-semibold">{formatDate(selectedDate)}</span>
-                  {!isToday && <span className="text-purple-300 text-sm">(Past Date)</span>}
+            <div className="anime-card">
+              <div className="p-4">
+                <div className="flex items-center gap-3 text-foreground">
+                  <CalendarIcon className="h-5 w-5 text-primary" />
+                  <span className="font-poppins font-semibold">{formatDate(selectedDate)}</span>
+                  {!isToday && <span className="status-indicator">Past Date</span>}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
             {/* Date Navigation */}
             <div className="flex items-center gap-2">
               <Button
                 onClick={() => navigateDate('prev')}
-                className="bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-sm p-2"
+                className="neon-button p-3"
+                variant="secondary"
               >
                 <ChevronLeft className="h-4 w-4" />
               </Button>
               
               <Popover>
                 <PopoverTrigger asChild>
-                  <Button className="bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-sm">
+                  <Button className="neon-button px-4 py-2">
                     <CalendarIcon className="h-4 w-4 mr-2" />
                     Pick Date
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-auto p-0 anime-card border-primary/30" align="start">
                   <Calendar
                     mode="single"
                     selected={selectedDate}
@@ -181,7 +188,8 @@ const Index = () => {
 
               <Button
                 onClick={() => navigateDate('next')}
-                className="bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-sm p-2"
+                className="neon-button p-3"
+                variant="secondary"
               >
                 <ChevronRight className="h-4 w-4" />
               </Button>
@@ -191,12 +199,12 @@ const Index = () => {
           <div className="flex gap-4">
             <Button
               onClick={() => setSelectedDate(new Date())}
-              className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
+              className="neon-button px-6 py-3 font-poppins font-semibold"
             >
               Today
             </Button>
             <Link to="/stats">
-              <Button className="bg-gradient-to-r from-purple-500 to-violet-500 hover:from-purple-600 hover:to-violet-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105">
+              <Button className="neon-button px-6 py-3 font-poppins font-semibold">
                 <BarChart3 className="h-5 w-5 mr-2" />
                 View Stats
               </Button>
@@ -206,66 +214,65 @@ const Index = () => {
 
         {/* Main Content */}
         {isWeekend ? (
-          <Card className="bg-gradient-to-r from-emerald-500/20 to-teal-500/20 backdrop-blur-sm border-emerald-400/30 max-w-md mx-auto">
-            <CardContent className="p-8 text-center">
+          <div className="anime-card max-w-md mx-auto">
+            <div className="p-8 text-center">
               <div className="text-6xl mb-4">🎉</div>
-              <h2 className="text-2xl font-bold text-white mb-2">Holiday!</h2>
-              <p className="text-emerald-200">No classes on {currentDay}!</p>
-            </CardContent>
-          </Card>
+              <h2 className="text-2xl font-orbitron font-bold text-primary mb-2">System Holiday</h2>
+              <p className="font-poppins text-secondary">No classes scheduled for {currentDay}</p>
+            </div>
+          </div>
         ) : (
           <div className="space-y-6">
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-white mb-2">
+              <h2 className="text-2xl font-orbitron font-bold sci-fi-header mb-2">
                 {isToday ? "Today's Classes" : `Classes for ${currentDay}`}
               </h2>
-              <p className="text-purple-200">
+              <p className="font-poppins text-muted-foreground">
                 {isToday ? "Mark your attendance for each subject" : "View or edit attendance for this date"}
               </p>
             </div>
 
-            <div className="grid gap-4 md:gap-6">
+            <div className="grid gap-6">
               {getUniqueSubjects(todaysSubjects).map(([subject, count]) => (
-                <Card key={subject} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-all duration-300">
-                  <CardHeader>
-                    <CardTitle className="text-white flex items-center justify-between">
-                      <span>{subject}</span>
+                <div key={subject} className="anime-card">
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-xl font-orbitron font-bold text-foreground">{subject}</h3>
                       {count > 1 && (
-                        <span className="bg-purple-500/30 text-purple-200 px-2 py-1 rounded-full text-sm">
+                        <span className="status-indicator">
                           {count} periods
                         </span>
                       )}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
+                    </div>
+                    
                     {dayAttendance[subject] !== undefined ? (
                       <div className="space-y-4">
-                        <div className="flex items-center justify-center gap-3 p-4 bg-white/5 rounded-lg">
+                        <div className="flex items-center justify-center gap-3 p-4 anime-card border-primary/30">
                           {dayAttendance[subject] ? (
                             <>
                               <CheckCircle className="h-6 w-6 text-green-400" />
-                              <span className="text-green-400 font-semibold">Marked Present</span>
+                              <span className="text-green-400 font-poppins font-semibold">Status: Present</span>
                             </>
                           ) : (
                             <>
                               <XCircle className="h-6 w-6 text-red-400" />
-                              <span className="text-red-400 font-semibold">Marked Absent</span>
+                              <span className="text-red-400 font-poppins font-semibold">Status: Absent</span>
                             </>
                           )}
                         </div>
                         <div className="text-center">
-                          <p className="text-purple-200 text-sm mb-3">Want to change this?</p>
+                          <p className="font-poppins text-muted-foreground text-sm mb-3">Update attendance status</p>
                           <div className="flex gap-3 justify-center">
                             <Button
                               onClick={() => markAttendance(subject, true)}
-                              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
+                              className="neon-button px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500"
                             >
                               <CheckCircle className="h-4 w-4 mr-2" />
                               Present
                             </Button>
                             <Button
                               onClick={() => markAttendance(subject, false)}
-                              className="bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white font-semibold px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
+                              className="neon-button px-6 py-3 bg-gradient-to-r from-red-500 to-rose-500"
                             >
                               <XCircle className="h-4 w-4 mr-2" />
                               Absent
@@ -274,19 +281,21 @@ const Index = () => {
                         </div>
                       </div>
                     ) : (
-                      <div className="space-y-3">
-                        <p className="text-purple-200 text-center mb-4">Did you attend {subject}?</p>
+                      <div className="space-y-4">
+                        <p className="font-poppins text-center text-muted-foreground mb-4">
+                          Mark attendance for {subject}
+                        </p>
                         <div className="flex gap-3 justify-center">
                           <Button
                             onClick={() => markAttendance(subject, true)}
-                            className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
+                            className="neon-button px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500"
                           >
                             <CheckCircle className="h-5 w-5 mr-2" />
                             Present
                           </Button>
                           <Button
                             onClick={() => markAttendance(subject, false)}
-                            className="bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
+                            className="neon-button px-6 py-3 bg-gradient-to-r from-red-500 to-rose-500"
                           >
                             <XCircle className="h-5 w-5 mr-2" />
                             Absent
@@ -294,8 +303,8 @@ const Index = () => {
                         </div>
                       </div>
                     )}
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
